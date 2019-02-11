@@ -1,0 +1,38 @@
+body {
+  background-color: #fcf3cf;
+}
+
+#root {
+  margin: 20px;
+  padding: 30px;
+  background-color: #d1f2eb;
+  height: 100%;
+  width: 100%;
+}
+
+#greeting {
+  font-size: 48px;
+  text-align: center;
+}
+
+h1 {
+  margin: 5px;
+}
+
+h2 {
+  margin: 5px;
+}
+
+div {
+  margin: 5px 5px 5px 20px;
+}
+
+ul {
+  margin: 0px;
+  list-style-type: none;
+}
+
+#submitted {
+  margin: 30px;
+  text-align: center;
+}
