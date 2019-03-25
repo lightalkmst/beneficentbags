@@ -120,13 +120,7 @@ F.p (serverless_path) (
 //              //
 //////////////////
 
-const serve_static_file = web_path => file_path => type => get (web_path) ((req, res) => write (res) (200, type, fs.readFileSync (file_path)))
-
-A.iter (([web_path, file_path, type]) => serve_static_file (web_path) (file_path) (type)) ([
-  ['bundle.js', 'build/client/bundle.js', 'js'],
-  ['favicon.ico', 'build/client/favicon.png', 'html'],
-  ['', 'build/client/index.html', 'html'],
-])
+app.use (express.static ('build/client'))
 
 ////////////////////
 //                //

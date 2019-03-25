@@ -49,7 +49,7 @@ const handler = wrapper (async event => {
     pocket_ribbon_color,
   }) => {
     // use only basic syntax so that Suzanne can easily change this at-will
-    return 1.toFixed (2)
+    return (1).toFixed (2)
   }
 
   return await ({

@@ -7,7 +7,6 @@ body {
   padding: 30px;
   background-color: #d1f2eb;
   height: 100%;
-  width: 100%;
 }
 
 #greeting {
@@ -23,13 +22,32 @@ h2 {
   margin: 5px;
 }
 
-div {
+#order div {
   margin: 5px 5px 5px 20px;
 }
 
 ul {
-  margin: 0px;
   list-style-type: none;
+}
+
+ul.navbar {
+  padding: 0px;
+}
+
+ul.navbar li {
+  float: left;
+}
+
+ul.navbar li a {
+  padding: 16px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+ul.navbar li a:hover {
+  background-color: blue;
 }
 
 #submitted {

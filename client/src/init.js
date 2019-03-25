@@ -36,7 +36,7 @@ window.time_string = timestamp => {
 
 window.idify = S.replace (' ') ('-')
 
-if (location.protocol != 'https:') {
+if (location.protocol != 'https:' && location != 'http://localhost:8080/') {
   location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`)
 }
 

@@ -1,6 +1,6 @@
 import xs from 'xstream'
 
-import init from '../init'
+import init from '../../../init'
 
 export default args => sources => {
   const {DOM} = sources
@@ -17,7 +17,7 @@ export default args => sources => {
           {
             A.map (x => (
               <li>
-                <input type='radio' id={`${group_id}-${idify (x)}`} name={group_id} value={x} />
+                <input type='checkbox' id={`${group_id}-${idify (x)}`} name={group_id} value={x} />
                 <label for={`${group_id}-${idify (x)}`}>{x}</label>
                 {x == 'Other' && ' - '}
                 {x == 'Other' && <input type='text' id={`${group_id}-other_info`} />}
@@ -28,27 +28,29 @@ export default args => sources => {
       )
     ),
     selection$: (
-      xs.merge (
+      xs.combine (
         ...A.map (x =>
-          x != 'Other'
+          (x != 'Other'
           ? (
-            DOM.select (`#${group_id}-${idify (x)}`).events ('click')
-            .map (D.get ('target'))
-            .map (D.get ('value'))
+            DOM.select (`#${group_id}-${idify (x)}`).events ('change')
+            .map (x => [x.target.checked, x.target.value])
           )
           : (
             xs.combine (
-              DOM.select (`#${group_id}-other`).events ('click'),
+              DOM.select (`#${group_id}-other`).events ('change')
+              .map (D.get ('target'))
+              .map (D.get ('checked')),
               DOM.select (`#${group_id}-other_info`).events ('change')
               .map (D.get ('target'))
               .map (D.get ('value'))
               .startWith (''),
             )
-            .map (A.get (1))
-            .map (x => `Other: ${x}`)
-          )
+            .map (([checked, info]) => [checked, `Other: ${info}`])
+          )).startWith (x => [false])
         ) (selection)
       )
+      .map (A.filter (A.get (0)))
+      .map (A.map (A.get (1)))
     ),
   }
 }

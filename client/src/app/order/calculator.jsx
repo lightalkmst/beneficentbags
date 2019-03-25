@@ -1,7 +1,7 @@
 import xs from 'xstream'
 
-import init from '../init'
-import cfg from '../../config.jsx'
+import init from '../../init'
+import cfg from '../../../config.jsx'
 
 export default sources => {
   const {

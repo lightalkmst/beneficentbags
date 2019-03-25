@@ -1,33 +1,24 @@
 import xs from 'xstream'
 import sampleCombine from 'xstream/extra/sampleCombine'
 
-import init from '../init'
-import cfg from '../../config.jsx'
+import init from '../../init'
+import cfg from '../../../config.jsx'
 
-import checkbox from './checkbox'
-import radio from './radio'
-import small_text from './small_text'
-import big_text from './big_text'
-import field from './field'
+import checkbox from './fields/checkbox'
+import radio from './fields/radio'
+import thumbnail_radio from './fields/thumbnail_radio'
+import small_text from './fields/small_text'
+import big_text from './fields/big_text'
+import field from './fields/field'
 import calculator from './calculator'
 
 export default sources => {
   const {DOM, HTTP} = sources
 
-  const make_field = ({
-    title,
-    subtext,
-    type,
-    group_id,
-    selection,
-  }) =>
+  const make_field = args =>
     field ({
-      title,
-      subtext,
-      type: type ({
-        group_id,
-        selection,
-      }),
+      ...args,
+      type: args.type (args),
     }) (sources)
 
   const {
@@ -59,23 +50,25 @@ export default sources => {
   } = make_field ({
     title: 'Style',
     subtext: 'Pick the weave style for the bag.',
-    type: radio,
+    type: thumbnail_radio,
+    height: '50px',
+    width: '50px',
     group_id: 'style',
     selection: [
       'Basic',
-      'Scales',
+      // 'Scales',
       'Cable',
-      'Diamond Lace',
+      // 'Diamond Lace',
       'Granite',
-      'Basketweave',
-      'Braided',
-      'Larksfoot',
-      'Puff',
-      'Boxed Puff',
+      // 'Basketweave',
+      // 'Braided',
+      'Larksfoot Tracks',
+      // 'Puff',
+      // 'Boxed Puff',
       'Flower Puff',
-      'Zig-Zag Puff',
-      'Crossed Stitch',
-      'Tunisian',
+      // 'Zig-Zag Puff',
+      // 'Crossed Stitch',
+      'Tunisian Smock',
     ],
   })
 
@@ -309,69 +302,87 @@ export default sources => {
       type: 'text/plain',
     }))
 
+  const success$ =
+    HTTP.select ('submit').flatten ()
+    .map (D.get ('body'))
+    .filter (F['='] ('Success'))
+
   return {
     DOM: (
-      xs.combine (
-        color_dom$,
-        style_dom$,
-        drawstring_material_dom$,
-        drawstring_color_dom$,
-        size_dom$,
-        pocket_dom$,
-        pocket_size_dom$,
-        pocket_color_dom$,
-        pocket_ribbon_color_dom$,
-        additional_requests_dom$,
-        contact_information_dom$,
-        calculator_dom$,
-        pocket_selection$.startWith ('No'),
-      )
-      .map (([
-        color_dom,
-        style_dom,
-        drawstring_material_dom,
-        drawstring_color_dom,
-        size_dom,
-        pocket_dom,
-        pocket_size_dom,
-        pocket_color_dom,
-        pocket_ribbon_color_dom,
-        additional_requests_dom,
-        contact_information_dom,
-        calculator_dom,
-        pocket_selection,
-      ]) =>
-        <div>
-          <h1>Appearance</h1>
-          <div>
-            {color_dom}
-            {style_dom}
-            {drawstring_material_dom}
-            {drawstring_color_dom}
+      xs.merge (
+        xs.combine (
+          color_dom$,
+          style_dom$,
+          drawstring_material_dom$,
+          drawstring_color_dom$,
+          size_dom$,
+          pocket_dom$,
+          pocket_size_dom$,
+          pocket_color_dom$,
+          pocket_ribbon_color_dom$,
+          additional_requests_dom$,
+          contact_information_dom$,
+          calculator_dom$,
+          pocket_selection$.startWith ('No'),
+        )
+        .map (([
+          color_dom,
+          style_dom,
+          drawstring_material_dom,
+          drawstring_color_dom,
+          size_dom,
+          pocket_dom,
+          pocket_size_dom,
+          pocket_color_dom,
+          pocket_ribbon_color_dom,
+          additional_requests_dom,
+          contact_information_dom,
+          calculator_dom,
+          pocket_selection,
+        ]) =>
+          <div id='order'>
+            <h1>Appearance</h1>
+            <div>
+              {color_dom}
+              {style_dom}
+              {drawstring_material_dom}
+              {drawstring_color_dom}
+            </div>
+            <h1>Dimensions</h1>
+            <div>
+              {size_dom}
+              {pocket_dom}
+              {pocket_selection == 'Yes' && (
+                <div>
+                  {pocket_size_dom}
+                  {pocket_color_dom}
+                  {pocket_ribbon_color_dom}
+                </div>
+              )}
+            </div>
+            <h1>Additional Information</h1>
+            <div>
+              {additional_requests_dom}
+              {contact_information_dom}
+            </div>
+            <div>
+              {calculator_dom}
+            </div>
+            <br />
+            <button id='submit'>Submit</button>
           </div>
-          <h1>Dimensions</h1>
-          <div>
-            {size_dom}
-            {pocket_dom}
-            {pocket_selection == 'Yes' && (
-              <div>
-                {pocket_size_dom}
-                {pocket_color_dom}
-                {pocket_ribbon_color_dom}
-              </div>
-            )}
+        ),
+        success$.map (() => (
+          <div id='submitted'>
+            Thank You!
+            <br />
+            Your order has been successfully submitted!
+            <br />
+            You should receive an e-mail within a few days confirming the order.
+            <br />
+            If you do not receive an e-mail, please e-mail cook.zanne@gmail.com.
           </div>
-          <h1>Additional Information</h1>
-          <div>
-            {additional_requests_dom}
-            {contact_information_dom}
-          </div>
-          <div>
-            {calculator_dom}
-          </div>
-          <br />
-          <button id='submit'>Submit</button>
-        </div>
+        ))
       )
     ),
     HTTP: (
@@ -380,10 +391,6 @@ export default sources => {
         calculator_http$
       )
     ),
-    success$: (
-      HTTP.select ('submit').flatten ()
-      .map (D.get ('body'))
-      .filter (F['='] ('Success'))
-    ),
+    navigation$: xs.never (),
   }
 }
