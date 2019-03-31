@@ -2,6 +2,7 @@ import xs from 'xstream'
 
 import init from './init'
 
+import home from './app/home/home'
 import order from './app/order/order'
 
 export default sources => {
@@ -14,6 +15,12 @@ export default sources => {
     'contact',
     'about',
   ]
+
+  const {
+    DOM: home_dom$,
+    // HTTP: home_dom$,
+    navigation$: home_navigation$,
+  } = home (sources)
 
   const {
     DOM: order_dom$,
@@ -30,19 +37,22 @@ export default sources => {
       ) (pages),
       order_navigation$,
     )
-    .startWith ('order')
+    .startWith ('home')
 
   return {
     DOM: (
       xs.combine (
+        home_dom$,
         order_dom$,
         navigation$,
       )
       .map (([
+        home_dom,
         order_dom,
         navigation,
       ]) => {
         const dom = {
+          home_dom,
           order_dom,
         }[`${navigation}_dom`]
 
@@ -62,7 +72,7 @@ export default sources => {
                 }
               </ul>
             </div>
-            <br style={{clear: 'left'}}/>
+            <br />
             {dom}
           </div>
         )
