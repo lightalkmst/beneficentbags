@@ -39,7 +39,7 @@ export default sources => {
         row1_dom,
         row2_dom,
       ]) => (
-        <div id='about'>
+        <div id='about' style={{background: 'var(--accent-color2)'}}>
           {row1_dom}
           {row2_dom}
         </div>

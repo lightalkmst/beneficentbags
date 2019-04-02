@@ -14,7 +14,7 @@ export default args => sources => {
     DOM: (
       xs.of(
         <div>
-          <textarea id={group_id}></textarea>
+          <textarea id={group_id} rows='4' cols='50'></textarea>
         </div>
       )
     ),

@@ -49,7 +49,7 @@ export default sources => {
     selection$: style_selection$,
   } = make_field ({
     title: 'Style',
-    subtext: 'Pick the weave style for the bag.',
+    subtext: 'Pick the weave style for the bag. Mouse over a thumbnail for an expanded view.',
     type: thumbnail_radio,
     height: '50px',
     width: '50px',
@@ -340,7 +340,7 @@ export default sources => {
           calculator_dom,
           pocket_selection,
         ]) =>
-          <div id='order'>
+          <div id='order' style={{background: 'var(--accent-color2)', padding: '20px'}}>
             <h1>Appearance</h1>
             <div>
               {color_dom}

@@ -23,7 +23,6 @@ export default args => sources => {
           <div style={{
             height,
             width: `${100 - S.match (/([0-9]+)%/) (width) [1]}%`,
-            background: '#b1c2eb',
             display: 'block',
             float: 'right',
           }}>

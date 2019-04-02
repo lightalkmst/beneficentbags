@@ -81,7 +81,7 @@ export default sources => {
             <div id='greeting'>
               Beneficent Bags
             </div>
-            <div>
+            <div style={{float: 'middle'}}>
               <ul className='navbar'>
                 {
                   A.map (x => (
@@ -92,7 +92,7 @@ export default sources => {
                 }
               </ul>
             </div>
-            <br />
+            <div style={{height: '0', clear: 'both'}} />
             {dom}
           </div>
         )

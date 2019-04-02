@@ -1,35 +1,58 @@
+:root {
+  --background-color: #2b4163;
+  --accent-color: #8ba0c1;
+  --accent-color2: #23272d;
+  --header-font-color: #f7dbc0;
+  --secondary-font-color: #b1c2eb;
+}
+
 body {
-  background-color: #fcf3cf;
+  background-color: var(--background-color);
   font-family: Helvetica;
+  color: var(--secondary-font-color);
 }
 
 #root {
   margin: 20px;
   padding: 30px;
-  background-color: #d1f2eb;
+  background-color: var(--accent-color);
   height: 100%;
+}
+
+#order div {
+  margin: 5px 5px 5px 20px;
 }
 
 #greeting {
   font-size: 48px;
   font-family: Cinzel;
+  color: var(--header-font-color);
   text-align: center;
+  background: var(--accent-color2);
+  height: 100px;
+  width: 600px;
+  line-height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 div {
   box-sizing: border-box;
 }
 
+a:visited {
+  color: var(--header-font-color);
+}
+
 h1 {
   margin: 5px;
+  color: var(--header-font-color);
 }
 
 h2 {
   margin: 5px;
-}
-
-#order div {
-  margin: 5px 5px 5px 20px;
+  color: var(--header-font-color);
 }
 
 ul {
@@ -51,10 +74,20 @@ ul.navbar li a {
   text-align: center;
   text-decoration: none;
   text-transform: capitalize;
+  background-color: var(--background-color);
+  -moz-transition: background .2s ease-in;
+  -o-transition: background .2s ease-in;
+  -webkit-transition: background .2s ease-in;
+  transition: background .2s ease-in;
 }
 
 ul.navbar li a:hover {
-  background-color: blue;
+  background-color: #60181b;
+  -moz-transition: background .2s ease-in;
+  -o-transition: background .2s ease-in;
+  -webkit-transition: background .2s ease-in;
+  transition: background .2s ease-in;
+  font-weight: bold;
 }
 
 #submitted {

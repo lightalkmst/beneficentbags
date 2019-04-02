@@ -11,7 +11,7 @@ export default sources => {
   return {
     DOM: (
       xs.of (
-        <div id='contact'>
+        <div id='contact' style={{background: 'var(--accent-color2)'}}>
           <div style={{width: '50%', float: 'left'}}>
             <div style={{padding: '100px'}}>
               Spicy jalapeno bacon ipsum dolor amet turducken picanha chuck pancetta beef rump sed officia lorem reprehenderit in corned beef voluptate kielbasa short loin. Tempor in consequat reprehenderit. Brisket drumstick picanha, anim nostrud magna sausage pork belly doner dolor venison do. Shank ball tip swine consequat short loin aute ad. Chuck alcatra picanha hamburger. Burgdoggen chicken quis irure commodo ex, voluptate magna dolore short loin elit short ribs pastrami rump. Andouille enim pig, jerky est excepteur jowl alcatra proident sint ex tri-tip pastrami eu.
@@ -21,16 +21,16 @@ export default sources => {
           </div>
           <div style={{width: '50%', float: 'right'}}>
             <div style={{padding: '100px'}}>
-              <input id='name' placeholder="Name"></input>
+              <input id='name' placeholder='Name'></input>
               <br />
               <br />
-              <input id='email' placeholder="Email"></input>
+              <input id='email' placeholder='Email'></input>
               <br />
               <br />
-              <input id='subject' placeholder="Subject"></input>
+              <input id='subject' placeholder='Subject'></input>
               <br />
               <br />
-              <textarea id='message' placeholder="Message"></textarea>
+              <textarea id='message' placeholder='Message' rows='4' cols='50'></textarea>
               <br />
               <br />
               <button id='submit'>Send</button>
