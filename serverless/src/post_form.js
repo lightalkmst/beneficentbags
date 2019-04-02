@@ -81,7 +81,7 @@ const handler = wrapper (async event => {
       while (count--) {
         try {
           await ses.sendEmail({
-            Destination: { ToAddresses: [cfg.email_to] },
+            Destination: {ToAddresses: [cfg.email_to] },
             Message: {
               Subject: {Data: 'New bag order was placed'},
               Body: {

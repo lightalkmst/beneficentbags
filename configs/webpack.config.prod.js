@@ -64,7 +64,7 @@ module.exports = {
           plugins: [
             // https://cycle.js.org/getting-started.html#getting-started-coding-consider-jsx
             // This allow us to use JSX to create virtual dom elements instead of Snabbdom helpers like div(), input(), ..
-            ['transform-react-jsx', { pragma: 'Snabbdom.createElement' }],
+            ['transform-react-jsx', {pragma: 'Snabbdom.createElement' }],
             // Allow Babel to transform rest properties for object destructuring assignment and spread properties for object literals.
             ['transform-object-rest-spread']
           ]

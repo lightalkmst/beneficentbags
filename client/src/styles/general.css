@@ -1,5 +1,6 @@
 body {
   background-color: #fcf3cf;
+  font-family: Helvetica;
 }
 
 #root {
@@ -11,7 +12,12 @@ body {
 
 #greeting {
   font-size: 48px;
+  font-family: Cinzel;
   text-align: center;
+}
+
+div {
+  box-sizing: border-box;
 }
 
 h1 {
@@ -27,6 +33,7 @@ h2 {
 }
 
 ul {
+  margin: 0px;
   list-style-type: none;
 }
 

@@ -18,7 +18,7 @@ export default args => sources => {
   return {
     DOM: (
       xs.of (
-        <div style={{overflow: 'auto'}}>
+        <div>
           <div style={{
             height,
             width: `${100 - S.match (/([0-9]+)%/) (width) [1]}%`,
@@ -33,8 +33,8 @@ export default args => sources => {
               {text}
             </div>
           </div>
-          <img src={image} style={{ height, width, display: 'block', float: 'right' }} />
-          <div style={{ height: '0', clear: 'both' }} />
+          <img src={image} style={{height, width, display: 'block', float: 'right'}} />
+          <div style={{height: '0', clear: 'both'}} />
         </div>
       )
     ),

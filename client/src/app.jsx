@@ -4,6 +4,8 @@ import init from './init'
 
 import home from './app/home/home'
 import order from './app/order/order'
+import about from './app/about/about'
+import contact from './app/contact/contact'
 
 export default sources => {
   const {DOM, HTTP} = sources
@@ -12,8 +14,8 @@ export default sources => {
     'home',
     'gallery',
     'order',
-    'contact',
     'about',
+    'contact',
   ]
 
   const {
@@ -27,6 +29,18 @@ export default sources => {
     HTTP: order_http$,
     navigation$: order_navigation$,
   } = order (sources)
+
+  const {
+    DOM: about_dom$,
+    HTTP: about_http$,
+    navigation$: about_navigation$,
+  } = about (sources)
+
+  const {
+    DOM: contact_dom$,
+    HTTP: contact_http$,
+    navigation$: contact_navigation$,
+  } = contact (sources)
 
   const navigation$ =
     xs.merge (
@@ -44,16 +58,22 @@ export default sources => {
       xs.combine (
         home_dom$,
         order_dom$,
+        about_dom$,
+        contact_dom$,
         navigation$,
       )
       .map (([
         home_dom,
         order_dom,
+        about_dom,
+        contact_dom,
         navigation,
       ]) => {
         const dom = {
           home_dom,
           order_dom,
+          about_dom,
+          contact_dom,
         }[`${navigation}_dom`]
 
         return (

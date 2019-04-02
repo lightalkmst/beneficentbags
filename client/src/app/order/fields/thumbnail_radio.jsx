@@ -32,7 +32,7 @@ export default args => sources => {
           }}>
             {
               A.map (x => (
-                <li style={{ height }}>
+                <li style={{height }}>
                   <input type='radio' id={`${group_id}-${idify (x)}`} name={group_id} value={x} />
                   <label for={`${group_id}-${idify (x)}`}>{x}</label>
                   {x == 'Other' && ' - '}
@@ -47,8 +47,8 @@ export default args => sources => {
           }}>
             {
               A.map (x => (
-                <li style={{ height }}>
-                  <img id={`${group_id}-${idify (x)}-thumbnail`} src={`${x}.JPG`} style={{ height, width }} />
+                <li style={{height }}>
+                  <img id={`${group_id}-${idify (x)}-thumbnail`} src={`${x}.jpg`} style={{height, width }} />
                 </li>
               )) (selection)
             }
@@ -59,7 +59,7 @@ export default args => sources => {
             margin: '0px',
             verticalAlign: 'top',
           }}>
-            {x && <img src={`${x}.JPG`} style={{ height: '300px', width: '300px' }} />}
+            {x && <img src={`${x}.jpg`} style={{height: '300px', width: '300px'}} />}
           </div>
         </div>
       )

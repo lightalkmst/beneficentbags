@@ -3,13 +3,14 @@ import xs from 'xstream'
 import init from '../../init'
 import cfg from '../../../config.jsx'
 
-import image_left from '../layout/image_left'
-import image_right from '../layout/image_right'
-
-export default sources => {
+export default args => sources => {
   const {
     HTTP,
   } = sources
+
+  const {
+    text,
+  } = args
 
   const {
     DOM: row1_dom$,
